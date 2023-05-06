@@ -14,8 +14,9 @@ function App() {
       let array = input.split('');
       array[array.length-1] = val;
       //console.log(array);
-      let andrea = array.join("");
-      setInput(andrea);
+      let nuevo = array.join("");
+      setInput(nuevo);
+      
     }
     else{
       setInput(input + val);
