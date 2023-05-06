@@ -1,0 +1,18 @@
+.boton-clear{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  width: 100%;
+  background-color: rgb(232, 88, 26);
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  border-radius: 3rem;
+  cursor: pointer;
+  border: 2px solid white;
+  user-select: none;
+}
+.boton-clear:hover {
+  background-color: rgba(232, 71, 26, 0.8);
+}
