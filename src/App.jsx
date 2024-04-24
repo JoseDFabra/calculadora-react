@@ -1,32 +1,30 @@
 import './App.css';
-import logoItm from './images/logo-itm.png';
 import Boton from './components/botones';
 import Pantalla from './components/pantalla';
 import BotonClear from './components/boton-clear';
 import { useState } from 'react';
-import { evaluate } from 'mathjs';
+import { evaluate, log } from 'mathjs';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 function App() {
   const [input, setInput] = useState('');
   
-  const agregarInput= (val) =>{
-    if((val === '*' || val === '.' || val === '+' || val === '/' ||val === '-') && (input.slice(-1) === '*' || input.slice(-1) === '.' || input.slice(-1) === '+' || input.slice(-1) === '/' ||input.slice(-1) === '-')){
-      let array = input.split('');
-      array[array.length-1] = val;
-      //console.log(array);
-      let nuevo = array.join("");
-      setInput(nuevo);
-      
-    }
-    else{
-      setInput(input + val);
-      //console.log(`guardado: ${input} --- ultimo valor: ${input.slice(-1)}  ---  ingresado:${val}`)
-    } 
-  };
+  const agregarInput = (val) => {
+    console.log("type of value: " + typeof val);
+    setInput(input + val);
+};
   
   const calcularResultado = ()=>{
     if(input){
-      setInput(evaluate(input));
+      try {
+        setInput(evaluate(input));
+      } catch (error) {
+        //alert('SYNTAX ERROR: ' + error.message);
+        setInput("Error");
+        setTimeout(function() {
+          setInput("");
+        }, 1500);
+      }
     }else{
       alert('porfavor ingrese valores para realizar algun calculo');
     }
@@ -34,12 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className='contenedor-logo-itm' >
-        <img 
-          src={logoItm}
-          className='logo-itm' 
-          alt='Logo del ITM' />
-      </div>
+      
       <div className='contenedor-calculadora' >
         <Pantalla input={input} />
         <div className='fila'>
